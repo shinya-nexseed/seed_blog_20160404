@@ -1,0 +1,14 @@
+# seed_blogというWEBサービスへのリクエスト (URL) を
+# すべてroutes.phpへと渡す処理をしている
+# URLの値はurlというキーでroutes.phpに渡される
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  RewriteCond %{REQUEST_FIENAME} !-d
+  RewriteCond %{REQUEST_FIENAME} !-f
+
+  RewriteRule ^(.*)$ routes.php?url=$1 [QSA,L]
+  RewriteRule ^index.html routes.php?url=$1 [QSA,L]
+
+  RewriteCond %{REQUEST_URI} !(^/webroot/^)
+</IfModule>
