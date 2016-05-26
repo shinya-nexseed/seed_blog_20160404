@@ -9,7 +9,7 @@
   <?php
     echo 'views/layout/application.phpを通りました。';
     echo '<br>';
-    include('./views/' . $resource . '/' . $action . '.php');
+    include('./views/' . $this->resource . '/' . $this->action . '.php');
   ?>
 </body>
 </html>
