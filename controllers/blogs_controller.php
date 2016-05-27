@@ -17,7 +17,15 @@
       break;
 
     case 'show':
-      $controller->show();
+      $controller->show($id);
+      break;
+
+    case 'add':
+      $controller->add();
+      break;
+
+    case 'create':
+      $controller->create($post);
       break;
     
     default:
@@ -56,11 +64,34 @@
     }
 
     // showアクションメソッド
-    public function show() {
+    public function show($id) {
       echo 'BlogsControllerクラスのshowアクションメソッド実行';
       echo '<br>';
+      
+      // モデルを呼び出し
+      $blog = new Blog();
+      $this->viewOptions = $blog->show($id);
+      // リソース名、アクション名を設定する
+      $this->resource = 'blogs';
+      $this->action = 'show';
+      // ビューを呼び出す
+      include('views/layout/application.php');
     }
 
-    // ・・・
+    public function add() {
+      // リソース名、アクション名を設定する
+      $this->resource = 'blogs';
+      $this->action = 'add';
+      // ビューを呼び出す
+      include('views/layout/application.php');
+    }
+
+    public function create($post) {
+      $blog = new Blog();
+      $blog->create($post); // 登録処理は返り値が必要ない
+
+      // indexへ遷移
+      header('Location: /seed_blog_20160404/blogs/index');
+    }
   }
 ?>
